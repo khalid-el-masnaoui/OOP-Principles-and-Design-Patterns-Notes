@@ -70,3 +70,27 @@ class User {
 $user = new \App\Models\User();
 $user->getInfo();
 ```
+
+
+## Traits
+
+Traits allow code reuse in multiple classes without using inheritance.
+
+```php
+trait Logger {
+	public function log($message) {
+		echo "Logging: " . $message;
+	}
+}
+
+class User {
+	use Logger;
+	public function createUser() {
+		$this->log('User created.');
+	}
+}
+
+$user = new User();
+$user->createUser();
+```
+
