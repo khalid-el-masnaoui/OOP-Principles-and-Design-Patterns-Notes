@@ -248,3 +248,12 @@ echo $clonedUser->address->street;   // Output => 456 Oak Ave
 
 ```
 
+
+## `$this`, `self`, and `static` keywords
+
+### `$this`
+
+- Refers to the **current instance** of the class.
+- Used to access non-static properties and methods of that specific object.
+- Cannot be used within static methods as static methods are not tied to a specific object instance.
+
