@@ -489,3 +489,63 @@ class ChildInvariantClass extends InvariantClass
     // public string $name; // Must remain 'string', cannot be 'int' or 'object'
 }
 ```
+
+## Readonly Properties
+
+In PHP's OOP, the `readonly` keyword provides a mechanism to create properties that can only be initialized once and then cannot be modified afterward. This enhances **immutability** and helps in writing more predictable and robust code.
+
+- **Immutability after Initialization:**  Once a `readonly` property is assigned a value (typically in the constructor), it cannot be reassigned or modified. Any attempt to do so will result in an `Error` exception.
+    
+- **Typed Properties Required:**  The `readonly` modifier can only be applied to typed properties. This means you must declare the data type of the property (e.g., `string`, `int`, `object`, `array`). 
+    
+- **Initialization Scope:**  A `readonly` property can only be initialized once, and this initialization must occur within the scope where the property is declared (usually within the class's constructor).
+    
+- **No Default Values (unless promoted):**  `readonly` properties cannot have a default value assigned directly in their declaration, unless they are promoted properties in the constructor.
+    
+- **Readonly Classes (PHP 8.2+):**  As of PHP 8.2, you can declare an entire class as `readonly`. This automatically makes all declared properties within that class `readonly` and also prevents the creation of dynamic properties
+
+
+```php
+class User
+{
+    public readonly int $id;
+    public readonly string $name;
+
+    public function __construct(int $id, string $name)
+    {
+        $this->id = $id;
+        $this->name = $name;
+    }
+}
+
+$user = new User(1, "khalid");
+
+// Legal read
+echo $user->name; // Output: khalid
+
+// Illegal reassignment - will throw an Error
+// $user->name = "malidkha";
+```
+
+```php
+readonly class Product
+{
+    public string $tag;
+    public float $price;
+
+    public function __construct(string $tag, float $price)
+    {
+        $this->tag = $tag;
+        $this->price = $price;
+    }
+}
+
+$product = new Product("P123", 99.99);
+
+// Legal read
+echo $product->price; // Output: 99.99
+
+// Illegal reassignment - will throw an Error
+// $product->price = 120.00;
+```
+
