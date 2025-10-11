@@ -52,3 +52,21 @@ $anotherCar->year = 2022;
 $anotherCar->startEngine(); // Output: The Honda Civic engine is starting.
 echo "Another car details: " . $anotherCar->getDetails() . "<br>"; // Output: Another car details: Honda Civic (2022)
 ```
+
+## Namespaces
+
+Namespaces prevent name conflicts when you use multiple classes with the same name.
+
+```php
+namespace App\Models;
+
+class User {
+    public function getInfo() {
+        echo "the info for the user";
+    }
+}
+
+ 
+$user = new \App\Models\User();
+$user->getInfo();
+```
