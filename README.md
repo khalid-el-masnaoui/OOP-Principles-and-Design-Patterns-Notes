@@ -46,3 +46,69 @@ class Date {
 - Encapsulated code is more likely to be reusable, since the implementation details are separated from the exposed interface, allowing us to leverage the same classes across different parts of the application or in entirely different projects without risking unwanted side effects.
 
 
+
+## Abstraction
+
+> Abstraction is hiding complex implementation details and showing only essential information to the user. This is achieved through `abstract` classes and `interfaces`.
+
+
+### Abstract Classes
+
+Abstract classes are declared with the `abstract` keyword and are used to define methods that must be implemented by any subclass that extends the abstract class. (an abstract class cannot be instantiated on its own)
+
+- **Declaration:** An abstract class is defined by prefixing the class name with the `abstract` keyword.
+- **Can contain abstract methods :** These are methods declared with the `abstract` keyword and only define the method signature (name, parameters, and visibility <`public`, `protected`>) without providing an implementation. Any class extending an abstract class must implement all of its abstract methods.
+- **Can contain concrete methods,  properties and constants** : should be <`public`, `protected`>
+
+```php
+abstract class Animal {
+    protected string $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+
+    // Abstract method - must be implemented by child classes
+    abstract public function makeSound();
+
+    // Concrete method - inherited by child classes
+    public function eat() {
+        echo $this->name . " is eating.\n";
+    }
+}
+
+```
+
+- **Extending:** To utilize an abstract class, a subclass must extend it and provide implementations for the abstract methods.
+
+```php
+class Dog extends Animal {
+    public function makeSound() {
+        echo $this->name . " says Woof!\n";
+    }
+}
+
+class Cat extends Animal {
+    public function makeSound() {
+        echo $this->name . " says Meow!\n";
+    }
+}
+```
+
+- **Instantiation**: You cannot create an instance of an abstract class directly.
+
+```php
+$dog = new Dog("Buddy");
+$dog->makeSound(); // Output: Buddy says Woof!
+$dog->eat();      // Output: Buddy is eating.
+
+$cat = new Cat("Whiskers");
+$cat->makeSound(); // Output: Whiskers says Meow!
+$cat->eat();      // Output: Whiskers is eating.
+
+// This would cause an error: Cannot instantiate abstract class Animal
+// $animal = new Animal("Generic Animal");
+```
+
+- **Purpose:** The primary purpose of an abstract class is to provide a common definition of a base class that multiple derived classes can share. The focus of an abstract class is on building an **inheritance hierarchy of classes**.
+
