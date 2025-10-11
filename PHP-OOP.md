@@ -409,3 +409,40 @@ if ($objA === $objC) {
     echo "objA and objC are identical (===)\n"; // This will be true
 }
 ```
+
+
+## Covariance, Contravariance, Invariance
+
+Covariance, contravariance, and invariance refer to how type declarations for parameters and return types behave when overriding methods in child classes or implementing interfaces. These concepts were fully supported starting from PHP 7.4.
+
+- **Covariance:** "Narrows" the return type (more specific).
+- **Contravariance:** "Widens" the parameter type (less specific).
+- **Invariance:** Requires an exact match of the type.
+
+These concepts are crucial for maintaining type safety and flexibility in object-oriented programming, particularly when dealing with **polymorphism** and **inheritance hierarchies.**
+### Covariance
+
+Covariance allows a child method's return type to be a more specific type than the return type of its parent's method or the interface's method. 
+This means if a parent method returns a `Fruit` object, the child method can return an `Apple` object (assuming `Apple` is a subclass of `Fruit`).
+
+```php
+class Fruit {}
+class Apple extends Fruit {}
+
+class Basket
+{
+    public function getFruit(): Fruit
+    {
+        return new Fruit();
+    }
+}
+
+class AppleBasket extends Basket
+{
+    // Covariant return type: Apple is a more specific type than Fruit
+    public function getFruit(): Apple
+    {
+        return new Apple();
+    }
+}
+```
