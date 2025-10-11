@@ -293,3 +293,55 @@ Overloading refers to the ability to dynamically create properties and methods i
     - `__call($name, $arguments)`
     - `__callStatic($name, $arguments)`
 
+
+## Anonymous Classes
+
+An anonymous class is a class that is defined and instantiated at the same time, without being assigned a specific name, useful for creating simple, one-off objects where a full class definition in a separate file would be unnecessary or add overhead.
+
+- **Use Cases:**
+    - **Testing and Mocking:** Creating simple mock objects for unit tests without needing to define a separate class file.
+    - **Callbacks and Event Handlers:** Providing quick, inline implementations for interfaces or abstract classes required by a callback or event listener.
+    - **Simple, Temporary Objects:** When a small, self-contained object is needed for a very specific, local purpose and will not be reused elsewhere.
+
+```php
+interface LoggerInterface
+{
+    public function log(string $message);
+}
+
+// Using an anonymous class to implement LoggerInterface
+$logger = new class implements LoggerInterface {
+    public function log(string $message)
+    {
+        echo "LOG: " . $message . PHP_EOL;
+    }
+};
+
+$logger->log("This is a test message.");
+
+// Anonymous class extending another class
+class BaseClass
+{
+    protected string $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+}
+
+$extendedObject = new class('Anonymous Extension') extends BaseClass {
+    public function greet(): string
+    {
+        return "Hello from " . $this->getName();
+    }
+};
+
+echo $extendedObject->greet() . PHP_EOL;
+```
+
