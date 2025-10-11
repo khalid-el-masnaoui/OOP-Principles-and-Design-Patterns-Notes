@@ -278,3 +278,18 @@ echo $clonedUser->address->street;   // Output => 456 Oak Ave
 - Use `self` for static members when you want to explicitly refer to the current class and ignore potential overrides in child classes.
 - Use `static` for static members when you want to leverage late static binding and allow for polymorphic behavior in child classes.
 
+
+## Overloading
+
+Overloading refers to the ability to dynamically create properties and methods in a class, which are then handled by **magic methods**.
+
+- **Property Overloading:**
+    - `__set($name, $value)`
+    - `__get($name)`
+    - `__isset($name)`
+    - `__unset($name)`
+
+- **Method Overloading:**
+    - `__call($name, $arguments)`
+    - `__callStatic($name, $arguments)`
+
