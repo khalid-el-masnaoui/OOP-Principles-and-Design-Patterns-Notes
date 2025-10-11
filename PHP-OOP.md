@@ -715,3 +715,34 @@ class YetAnotherAnotherClass {
 $reflectionClass = new ReflectionClass(YetAnotherAnotherClass::class);
 echo $reflectionClass->getName(); // Outputs: YetAnotherAnotherClass
 ```
+
+## Auto-loading
+
+PHP's OOP autoloading mechanism simplifies class management by automatically including class files when they are needed, eliminating the need for manual `require` or `include` statements. This is particularly beneficial in large projects with numerous classes.
+
+### `spl_autoload_register`
+
+The core function for autoloading in PHP is `spl_autoload_register()`. This function registers one or more autoloader functions, which PHP will call when an undefined class, interface, or trait is accessed.
+
+```php
+spl_autoload_register(function ($className) {
+    // Convert namespace separators to directory separators
+    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+
+    // Define the base directory where your classes are located
+    $baseDir = __DIR__ . '/src/'; 
+
+    // Construct the full path to the class file
+    $file = $baseDir . $className . '.php';
+
+    // Check if the file exists and include it
+    if (file_exists($file)) {
+        require_once $file;
+    }
+});
+
+// Example usage:
+// If you have a class 'MyNamespace\MyClass' in 'src/MyNamespace/MyClass.php'
+$obj = new MyNamespace\MyClass(); 
+$obj->doSomething();
+```
