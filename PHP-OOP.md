@@ -473,3 +473,19 @@ class GenericProcessor extends Processor
     }
 }
 ```
+
+### Invariance
+
+Invariance means that the type declaration in the child method or interface implementation must exactly match the type declaration in the parent method or interface. Neither a more specific (covariant) nor a less specific (contravariant) type is allowed. In PHP, property types are typically invariant.
+
+```php
+class InvariantClass
+{
+    public string $name; // This property type is invariant
+}
+
+class ChildInvariantClass extends InvariantClass
+{
+    // public string $name; // Must remain 'string', cannot be 'int' or 'object'
+}
+```
