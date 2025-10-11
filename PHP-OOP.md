@@ -773,3 +773,77 @@ require __DIR__ . '/vendor/autoload.php';
 // Now you can instantiate classes without manual requires
 $userController = new MyApp\Controller\UserController();
 ```
+
+## Attributes
+
+PHP attributes, introduced in PHP 8, provide a way to add structured, machine-readable metadata to various code elements in an object-oriented programming (OOP) context. This metadata can then be inspected at runtime using the Reflection API, enabling dynamic behavior without modifying the core logic.
+
+
+Attributes are special classes, marked with the global **`#[Attribute]`** attribute, that serve as annotations for other parts of your code. They can be applied to:
+
+- **Classes:** To provide metadata about the class itself.
+- **Methods:** To add information about a specific method's behavior or purpose.
+- **Properties:** To describe characteristics of a class property.
+- **Functions:** To annotate standalone functions.
+- **Parameters:** To add details about function or method parameters.
+- **Class Constants:** To provide metadata for class constants.
+
+### Define
+
+- The `#[Attribute]` attribute specifies where the `Route` attribute can be used (methods and classes in this example). The constructor defines the data the attribute will hold. 
+- **Attribute::TARGET_CLASS**
+- **Attribute::TARGET_FUNCTION**
+- **Attribute::TARGET_METHOD**
+- **Attribute::TARGET_PROPERTY**
+- **Attribute::TARGET_CLASS_CONSTANT**
+- **Attribute::TARGET_PARAMETER**
+- **Attribute::TARGET_ALL**
+
+```php
+#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS)]
+class Route
+{
+	public function __construct(public string $path, public array $methods = ['GET']) {}
+}
+```
+
+
+
+### Apply
+
+- Attributes are applied using the `#[AttributeName]` syntax, optionally with constructor arguments.
+
+```php
+#[Route('/users', methods: ['GET', 'POST'])]
+class UserController
+{
+	#[Route('/{id}', methods: ['GET'])]
+	public function getUser(int $id)
+	{
+		// ...
+	}
+}
+```
+
+
+### Retrieve
+
+- The Reflection API allows you to inspect classes, methods, and properties at runtime and retrieve their associated attributes. You can then instantiate the attribute objects to access their data.
+
+```php
+$reflectionClass = new ReflectionClass(UserController::class);
+$attributes = $reflectionClass->getAttributes(Route::class);
+
+foreach ($attributes as $attribute) {
+	$route = $attribute->newInstance();
+	echo "Class Route: " . $route->path . " (" . implode(', ', $route->methods) . ")\n";
+}
+
+$reflectionMethod = new ReflectionMethod(UserController::class, 'getUser');
+$methodAttributes = $reflectionMethod->getAttributes(Route::class);
+
+foreach ($methodAttributes as $attribute) {
+	$route = $attribute->newInstance();
+	echo "Method Route: " . $route->path . " (" . implode(', ', $route->methods) . ")\n";
+    }
+```
