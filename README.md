@@ -112,3 +112,86 @@ $cat->eat();      // Output: Whiskers is eating.
 
 - **Purpose:** The primary purpose of an abstract class is to provide a common definition of a base class that multiple derived classes can share. The focus of an abstract class is on building an **inheritance hierarchy of classes**.
 
+
+### Interfaces
+
+Interfaces provide a blueprint for classes, defining a contract that classes must adhere to. They specify a set of methods that a class must implement, but without providing any implementation details for those methods.
+
+
+- **Contractual Agreement:** An interface acts as a contract, ensuring that any class implementing it will possess the specified methods. This promotes consistency and predictable behavior across different classes that share a common functionality.
+
+- **Method Declarations Only:** Interfaces contain only method declarations (signatures), not their actual code or logic. The implementation of these methods is left to the concrete classes that implement the interface.
+
+- **No Properties (Variables):** Interfaces cannot contain properties (variables), only constants.
+
+- **Public Methods:** All methods declared within an interface must be declared as `public`. 
+
+- `implements` Keyword: Classes use the `implements` keyword to declare that they will adhere to the contract defined by an interface. A class can implement multiple interfaces, separating them with commas.
+
+- **Polymorphism:** Interfaces are crucial for achieving polymorphism in PHP. They allow different classes to be treated uniformly through a common interface, even if their underlying implementations differ. This enables greater flexibility and extensibility in code.
+
+- **Extending Interfaces:** Interfaces can extend other interfaces using the `extends` keyword. A class implementing an extended interface must implement methods from all interfaces in the inheritance chain.
+
+
+
+```php 
+interface Cache
+{
+    public function read(string $key): ?string;
+    public function write(string $key, string $value, int $ttl = 0): bool;
+}
+
+class RedisCache implements Cache
+{
+    public function read(string $key): ?string
+    {
+        // Redis-specific read logic
+        return "Data from Redis for " . $key;
+    }
+
+    public function write(string $key, string $value, int $ttl = 0): bool
+    {
+        // Redis-specific write logic
+        return true;
+    }
+}
+
+class FileCache implements Cache
+{
+    public function read(string $key): ?string
+    {
+        // File-specific read logic
+        return "Data from File for " . $key;
+    }
+
+    public function write(string $key, string $value, int $ttl = 0): bool
+    {
+        // File-specific write logic
+        return true;
+    }
+}
+
+function processData(Cache $cache, string $key, string $value = null)
+{
+    if ($value) {
+        $cache->write($key, $value);
+        echo "Wrote '{$value}' to {$key} using " . get_class($cache) . "<br>";
+    } else {
+        $data = $cache->read($key);
+        echo "Read '{$data}' for {$key} using " . get_class($cache) . "<br>";
+    }
+}
+
+$redis = new RedisCache();
+$file = new FileCache();
+
+processData($redis, "user:123", "khalid el");
+processData($file, "product:456", "Widget A");
+processData($redis, "user:123");
+processData($file, "product:456");
+```
+
+Interfaces can technically declare a `__construct()` method, but it is strongly discouraged and generally considered a bad practice.
+
+
+
