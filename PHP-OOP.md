@@ -257,3 +257,10 @@ echo $clonedUser->address->street;   // Output => 456 Oak Ave
 - Used to access non-static properties and methods of that specific object.
 - Cannot be used within static methods as static methods are not tied to a specific object instance.
 
+
+### `self`
+
+- Refers to the **current class** itself, not a specific object instance.
+- Used to access static properties and methods within the same class. 
+- Accessed using the scope resolution operator (`::`), for example, `self::$staticProperty` or `self::staticMethod()`.
+- Does not account for inheritance and will always refer to the class in which it is written, even if a child class overrides the static member.
