@@ -446,3 +446,30 @@ class AppleBasket extends Basket
     }
 }
 ```
+
+### Contravariance
+
+Contravariance allows a child method's parameter type to be a less specific type than the parameter type of its parent's method or the interface's method. 
+This means if a parent method accepts an `Apple` object, the child method can accept a `Fruit` object.
+
+```php
+class Fruit {}
+class Apple extends Fruit {}
+
+class Processor
+{
+    public function process(Apple $apple): void
+    {
+        // ... process the apple
+    }
+}
+
+class GenericProcessor extends Processor
+{
+    // Contravariant parameter type: Fruit is a less specific type than Apple
+    public function process(Fruit $fruit): void
+    {
+        // ... process the fruit
+    }
+}
+```
