@@ -549,3 +549,169 @@ echo $product->price; // Output: 99.99
 // $product->price = 120.00;
 ```
 
+
+## Class & Object Functions
+
+### `class_exists`
+
+`class_exists()` function is used to determine if a given class has been defined. This function is particularly useful when working with object-oriented programming (OOP) to ensure a class is available before attempting to instantiate an object or interact with its members. 
+
+The `class_exists()` function takes two parameters:
+
+- `$class_name`:  A string representing the name of the class to check for. This parameter is case-insensitive.
+- `$autoload`:  An optional boolean parameter (defaults to `TRUE`) that determines whether to trigger the autoloader if the class is not already loaded.
+
+```php
+// Define a class
+class MyClass {
+    public $property = "Hello";
+}
+
+// Check if 'MyClass' exists
+if (class_exists('MyClass')) {
+    echo "Class 'MyClass' exists.\n";
+    $obj = new MyClass();
+    echo $obj->property . "\n";
+} else {
+    echo "Class 'MyClass' does not exist.\n";
+}
+
+// Check for a non-existent class
+if (class_exists('NonExistentClass')) {
+    echo "Class 'NonExistentClass' exists.\n";
+} else {
+    echo "Class 'NonExistentClass' does not exist.\n";
+}
+```
+
+**Note** :  If the class is namespaced. The class name is `App\MyClass`, not `MyClass`. You should use the fully-qualified class name `class_exists(App\MyClass)`
+
+### `method_exist`
+
+Checks if a method exists within a class or an object.
+
+```php
+method_exists(object|string $object_or_class, string $method): bool
+```
+
+Parameters:
+- `$object_or_class`: This can be either an object instance or a string representing the class name.
+- `$method`: This is a string representing the name of the method to check for existence.
+
+
+```php
+class MyClass {
+    public function myMethod() {
+        echo "This is myMethod.";
+    }
+
+    public function anotherMethod() {
+        echo "This is anotherMethod.";
+    }
+}
+
+$obj = new MyClass();
+
+// Check if 'myMethod' exists in the object
+if (method_exists($obj, 'myMethod')) {
+    echo "myMethod exists in the object.\n";
+} else {
+    echo "myMethod does not exist in the object.\n";
+}
+
+// Check if 'nonExistentMethod' exists in the class
+if (method_exists('MyClass', 'nonExistentMethod')) {
+    echo "nonExistentMethod exists in the class.\n";
+} else {
+    echo "nonExistentMethod does not exist in the class.\n";
+}
+
+// Check for a method using a class name string
+if (method_exists('MyClass', 'anotherMethod')) {
+    echo "anotherMethod exists in the class.\n";
+} else {
+    echo "anotherMethod does not exist in the class.\n";
+}
+```
+
+### `property_exists`
+
+The PHP function `property_exists()` is used to determine whether a class or an object has a specific property. It is particularly useful in Object-Oriented Programming (OOP) when you need to check for the presence of a property before attempting to access or manipulate it, thereby preventing potential errors.
+
+```php
+property_exists(object|string $object_or_class, string $property);
+```
+
+Parameters:
+
+- `$object_or_class`: This parameter can be either an object instance or the name of a class (as a string).
+- `$property`: This is the name of the property you want to check for, as a string.
+
+Key Difference from `isset()`:
+
+- Unlike `isset()`, which checks if a property exists and is not `null`, `property_exists()` returns `true` even if the property exists but its value is `null`. This makes `property_exists()` a more precise tool for simply verifying the existence of a property, regardless of its current value.
+
+
+### Class Name
+
+In PHP, there are several ways to get the name of a class in an object-oriented programming context
+
+#### `get_class()`
+
+This function returns the name of the class of which an object is an instance. You can pass the object as an argument, or if called inside a class method, you can omit the argument and it will return the current class's name. 
+
+
+```php
+class MyClass {
+	public function getMyClassName() {
+		return get_class($this); // Returns "MyClass"
+	}
+}
+
+$obj = new MyClass();
+echo get_class($obj); // Outputs: MyClass
+echo $obj->getMyClassName(); // Outputs: MyClass
+```
+
+**Note** :  `get_class()` function returns the fully qualified class name (FQCN) of an object, including its namespace if it belongs to one.
+
+#### `_CLASS_` magic constant
+
+```php
+class AnotherClass {
+	public function getMagicClassName() {
+		return __CLASS__; // Returns "AnotherClass"
+	}
+}
+
+$obj = new AnotherClass();
+echo $obj->getMagicClassName(); // Outputs: AnotherClass
+```
+
+**Note** : The magic constant `__CLASS__` in PHP does not return the fully qualified class name.
+#### `::class`
+
+This provides a way to get the **fully qualified class name** as a string literal at compile time (if any). It's particularly useful for avoiding hardcoded strings and benefiting from IDE features like refactoring.
+
+```php
+namespace MyNamespace;
+
+class YetAnotherClass {
+	// ...
+}
+
+echo MyNamespace\YetAnotherClass::class; // Outputs: MyNamespace\YetAnotherClass
+```
+
+#### ReflectionClass
+
+The `ReflectionClass::getName()` method returns a string containing the fully qualified class name, including its namespace (if any).
+
+```php
+class YetAnotherAnotherClass {
+	// ...
+}
+
+$reflectionClass = new ReflectionClass(YetAnotherAnotherClass::class);
+echo $reflectionClass->getName(); // Outputs: YetAnotherAnotherClass
+```
