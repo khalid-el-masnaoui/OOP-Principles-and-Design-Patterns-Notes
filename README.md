@@ -14,7 +14,6 @@ Object-Oriented Programming (OOP) is a programming paradigm that structures code
       + **[Abstract Classes](#abstract-classes)**
       + **[Interfaces](#interfaces)**
    * **[Inheritance](#inheritance)**
-         - **[Best Practices](#best-practices)**
    * **[Polymorphism](#polymorphism)**
 
 # Fundamental Principles of Object-Oriented Programming
