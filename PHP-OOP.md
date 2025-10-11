@@ -345,3 +345,67 @@ $extendedObject = new class('Anonymous Extension') extends BaseClass {
 echo $extendedObject->greet() . PHP_EOL;
 ```
 
+
+## Object Comparison 
+
+In PHP, objects can be compared using two main operators: the comparison operator (`==`) and the identity operator (`===`).
+
+
+### Comparison Operator (`==`)
+
+When using the `==` operator to compare two objects, PHP determines if the objects are "equal" based on the following criteria:
+
+- **Same Class:** Both objects must be instances of the same class.
+- **Same Attributes and Values:** Both objects must have the same attributes (properties) with the same values. The values themselves are compared using `==`.
+
+```php
+class MyClass {
+    public $prop1;
+    public $prop2;
+
+    public function __construct($p1, $p2) {
+        $this->prop1 = $p1;
+        $this->prop2 = $p2;
+    }
+}
+
+$obj1 = new MyClass("valueA", 123);
+$obj2 = new MyClass("valueA", 123);
+$obj3 = new MyClass("valueB", 456);
+
+if ($obj1 == $obj2) {
+    echo "obj1 and obj2 are equal (==)\n"; // This will be true
+}
+
+if ($obj1 == $obj3) {
+    echo "obj1 and obj3 are equal (==)\n"; // This will be false
+}
+```
+
+### Identity Operator (`===`)
+
+The `===` operator performs a stricter comparison, checking for "identity." Two object variables are considered identical if: 
+
+- **Same Instance:** They refer to the exact same instance of the same class in memory. This means they are essentially two different names pointing to the same object.
+
+```php
+class MyClass {
+    public $prop1;
+
+    public function __construct($p1) {
+        $this->prop1 = $p1;
+    }
+}
+
+$objA = new MyClass("data");
+$objB = new MyClass("data");
+$objC = $objA; // $objC now refers to the same instance as $objA
+
+if ($objA === $objB) {
+    echo "objA and objB are identical (===)\n"; // This will be false
+}
+
+if ($objA === $objC) {
+    echo "objA and objC are identical (===)\n"; // This will be true
+}
+```
