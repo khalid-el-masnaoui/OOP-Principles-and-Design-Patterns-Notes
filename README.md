@@ -195,3 +195,76 @@ Interfaces can technically declare a `__construct()` method, but it is strongl
 
 
 
+## Inheritance
+
+> Inheritance allows a new class (child class) to inherit properties and methods from an existing class (parent class). This promotes code reusability and establishes a "is-a" relationship between classes.
+
+
+This mechanism enables code reusability and establishes a relationship between classes where the subclass is a specialized version of the superclass. The subclass can add its own unique features or override the behavior of the superclass, which promotes a hierarchical organization of classes.
+
+
+- **Code Reusability:**  Child classes automatically inherit the public and protected properties and methods of their parent class, eliminating the need to rewrite common code.
+    
+- `extends` Keyword:  The `extends` keyword is used to establish the inheritance relationship, where a child class extends a parent class.
+
+- **Visibility:**
+    - **Public & protected**:  properties and methods are inherited by child classes.
+    - **Private**: properties and methods are not inherited and remain exclusive to their defining class.
+    
+- **Overriding:**  Child classes can override inherited public and protected methods and properties to provide their own specific implementations.
+    - When overriding methods, the child method's signature must be compatible with the parent method's signature.
+    - When overriding properties, the visibility of the child property cannot be decreased (e.g., a public parent property cannot be overridden as protected in the child).
+    
+- **Constructors:**  When a child class defines its own constructor and overrides the parent's constructor, it does not automatically call the parent's constructor. The parent's constructor needs to be explicitly called using `parent::__construct()` within the child's constructor if its logic is still required.
+    
+- `parent::` Keyword: This keyword allows access to the parent class's methods or constants, particularly useful when overriding methods but still needing to execute the parent's logic.
+
+```php 
+class Animal {
+    public $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function eat() {
+        echo $this->name . " is eating.\n";
+    }
+
+    public function sleep() {
+        echo $this->name . " is sleeping.\n";
+    }
+}
+
+// Child class inheriting from Animal
+class Dog extends Animal {
+    public function bark() {
+        echo $this->name . " is barking: Woof! Woof!\n";
+    }
+
+    // Overriding the sleep method from the parent class
+    public function sleep() {
+        echo $this->name . " is sleeping soundly in its bed.\n";
+    }
+}
+
+// Child class inheriting from Animal
+class Cat extends Animal {
+    public function meow() {
+        echo $this->name . " is meowing: Meow!\n";
+    }
+}
+```
+
+
+#### Best Practices
+
+- **Use Inheritance Sparingly:** Inheritance should only be used when there is a clear relationship and shared behavior. Overusing inheritance can lead to complex hierarchies that are hard to understand and maintain.
+
+- **Prefer Composition Over Inheritance:** In many cases, using composition (including objects of other classes as properties) can be more flexible than inheritance. This is often referred to as the `has a` relationship.
+
+- **Protected Over Private:** If you think a property or method should be hidden from the public but still accessible to child classes, use protected instead of private visibility. This ensures encapsulation while still allowing inheritance.
+
+- **Liskov Substitution Principle (LSP):** When overriding methods, make sure that the child class's methods can safely replace the parent class's methods. This means they should accept the same input parameters and return the same types.
+
+- **Avoid Deep Inheritance Hierarchies:** Deeply nested inheritance can become problematic and hard to follow. Instead, aim for a shallow hierarchy and consider other design patterns, like interfaces, to provide flexibility.
