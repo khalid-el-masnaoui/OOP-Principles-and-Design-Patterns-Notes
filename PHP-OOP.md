@@ -746,3 +746,30 @@ spl_autoload_register(function ($className) {
 $obj = new MyNamespace\MyClass(); 
 $obj->doSomething();
 ```
+
+### Composer and PSR-4
+
+For more robust and standardized autoloading in modern PHP projects, Composer is widely used. Composer leverages the PSR-4 autoloading standard, which provides a convention for mapping namespaces to file paths. Composer generates an optimized autoloader based on your `composer.json` configuration, handling the complexities of class loading automatically.
+
+
+```php
+//composer.json
+//...
+
+{
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src/"
+        }
+    }
+}
+```
+
+This configuration tells Composer that any class within the `MyApp\` namespace (e.g., `MyApp\Controller\UserController`) will be found in a corresponding file within the `src/` directory (e.g., `src/Controller/UserController.php`).
+
+```php
+require __DIR__ . '/vendor/autoload.php';
+
+// Now you can instantiate classes without manual requires
+$userController = new MyApp\Controller\UserController();
+```
