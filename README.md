@@ -268,3 +268,89 @@ class Cat extends Animal {
 - **Liskov Substitution Principle (LSP):** When overriding methods, make sure that the child class's methods can safely replace the parent class's methods. This means they should accept the same input parameters and return the same types.
 
 - **Avoid Deep Inheritance Hierarchies:** Deeply nested inheritance can become problematic and hard to follow. Instead, aim for a shallow hierarchy and consider other design patterns, like interfaces, to provide flexibility.
+
+## Polymorphism
+
+> Polymorphism allows objects of different classes to be treated as objects of a common superclass. This is often achieved using interfaces, abstract classes (abstract method) and inheritance overriding 
+
+
+Polymorphism enables a single action to be performed in different ways, depending on the specific object type.
+
+
+```php
+    interface Shape {
+        public function calculateArea(): float;
+    }
+
+    class Circle implements Shape {
+        private float $radius;
+
+        public function __construct(float $radius) {
+            $this->radius = $radius;
+        }
+
+        public function calculateArea(): float {
+            return M_PI * $this->radius * $this->radius;
+        }
+    }
+
+    class Square implements Shape {
+        private float $side;
+
+        public function __construct(float $side) {
+            $this->side = $side;
+        }
+
+        public function calculateArea(): float {
+            return $this->side * $this->side;
+        }
+    }
+
+    function printArea(Shape $shape) {
+        echo "Area: " . $shape->calculateArea() . "\n";
+    }
+
+    $circle = new Circle(5);
+    $square = new Square(4);
+
+    printArea($circle); // Output: Area: 78.539816339745
+    printArea($square); // Output: Area: 16
+```
+
+
+```php
+    abstract class Animal {
+        abstract public function makeSound(): string;
+
+        public function eat(): string {
+            return "This animal eats food.";
+        }
+    }
+
+    class Dog extends Animal {
+        public function makeSound(): string {
+            return "Woof!";
+        }
+    }
+
+    class Cat extends Animal {
+        public function makeSound(): string {
+            return "Meow!";
+        }
+    }
+
+    function describeAnimal(Animal $animal) {
+        echo "Sound: " . $animal->makeSound() . ", " . $animal->eat() . "\n";
+    }
+
+    $dog = new Dog();
+    $cat = new Cat();
+
+    describeAnimal($dog); // Output: Sound: Woof!, This animal eats food.
+    describeAnimal($cat); // Output: Sound: Meow!, This animal eats food.
+```
+
+- Polymorphism enhances code reusability, flexibility, and extensibility by allowing generic code to operate on different object types that share a common interface or inheritance hierarchy.
+
+
+
