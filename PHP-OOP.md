@@ -847,3 +847,148 @@ foreach ($methodAttributes as $attribute) {
 	echo "Method Route: " . $route->path . " (" . implode(', ', $route->methods) . ")\n";
     }
 ```
+
+## Reflection Class
+
+The `ReflectionClass` in PHP is a built-in class that provides the ability to inspect and interact with the internal structure of classes at runtime. It is part of PHP's **Reflection API**, which allows a program to examine and modify its own structure.
+
+
+The PHP `ReflectionClass` enables:
+
+- **Introspection of Class Structure:**
+    - Retrieving the class name, namespace, short name, and filename where it's defined.
+    - Determining if a class is abstract, final, a trait, or an interface.
+    - Getting information about parent classes and implemented interfaces.
+    
+- **Inspection of Class Members:**
+    - Accessing and retrieving details about class constants, including their names and values.
+    - Inspecting class properties (variables), including their names, default values, visibility (public, protected, private), and whether they are static.
+    - Examining class methods (functions), including their names, parameters, return types, visibility, and whether they are static or abstract.
+    
+- **Dynamic Interaction:**
+    - Creating new instances of a class, even without calling its constructor directly (using `newInstanceWithoutConstructor`).
+    - Invoking methods on a class or object dynamically.
+    - Setting and getting property values, even for private or protected properties (though this practice should be used with caution as it can break encapsulation).
+    
+- **Annotation Parsing:** You can extract and analyze PHPDoc annotations from class and method doc comments, allowing you to add metadata to your code. As well as PHP `Attributes` (preferred way!)
+
+
+The PHP `ReflectionClass` is a powerful tool used in various scenarios, including **dependency injection containers**, **ORMs,** and **debugging tools**, where dynamic analysis and manipulation of class structures are required. However, its use should be considered carefully, as excessive reliance on reflection can sometimes lead to code that is harder to understand and maintain, and can potentially **break encapsulation principles**.
+
+```php
+class MyExampleClass
+{
+    const MY_CONSTANT = 'This is a constant.';
+
+    public static $staticProperty = 'Static value.';
+    public $publicProperty = 'Public value.';
+    protected $protectedProperty = 'Protected value.';
+    private $privateProperty = 'Private value.';
+
+    public function __construct($arg1, $arg2)
+    {
+        // Constructor logic
+    }
+
+    public function publicMethod()
+    {
+        return 'Public method called.';
+    }
+
+    protected function protectedMethod()
+    {
+        return 'Protected method called.';
+    }
+
+    private function privateMethod()
+    {
+        return 'Private method called.';
+    }
+
+    public static function staticMethod()
+    {
+        return 'Static method called.';
+    }
+}
+
+// Create a ReflectionClass instance for MyExampleClass
+$reflectionClass = new ReflectionClass('MyExampleClass');
+
+echo "--- Class Information ---\n";
+echo "Class Name: " . $reflectionClass->getName() . "\n";
+echo "Is Final: " . ($reflectionClass->isFinal() ? 'Yes' : 'No') . "\n";
+echo "Is Abstract: " . ($reflectionClass->isAbstract() ? 'Yes' : 'No') . "\n";
+echo "Is Interface: " . ($reflectionClass->isInterface() ? 'Yes' : 'No') . "\n";
+echo "Is Instantiable: " . ($reflectionClass->isInstantiable() ? 'Yes' : 'No') . "\n";
+echo "File Name: " . $reflectionClass->getFileName() . "\n";
+echo "Start Line: " . $reflectionClass->getStartLine() . "\n";
+echo "End Line: " . $reflectionClass->getEndLine() . "\n";
+echo "Namespace: " . $reflectionClass->getNamespaceName() . "\n";
+echo "Parent Class: " . ($reflectionClass->getParentClass() ? $reflectionClass->getParentClass()->getName() : 'None') . "\n";
+echo "Doc Comment: " . ($reflectionClass->getDocComment() ?: 'None') . "\n";
+
+echo "\n--- Constants ---\n";
+$constants = $reflectionClass->getConstants();
+foreach ($constants as $name => $value) {
+    echo "Constant: {$name} = {$value}\n";
+}
+
+echo "\n--- Properties ---\n";
+$properties = $reflectionClass->getProperties();
+foreach ($properties as $property) {
+    echo "Property: {$property->getName()} (Visibility: ";
+    if ($property->isPublic()) echo "public";
+    if ($property->isProtected()) echo "protected";
+    if ($property->isPrivate()) echo "private";
+    echo ", Static: " . ($property->isStatic() ? 'Yes' : 'No') . ")\n";
+}
+
+echo "\n--- Methods ---\n";
+$methods = $reflectionClass->getMethods();
+foreach ($methods as $method) {
+    echo "Method: {$method->getName()} (Visibility: ";
+    if ($method->isPublic()) echo "public";
+    if ($method->isProtected()) echo "protected";
+    if ($method->isPrivate()) echo "private";
+    echo ", Static: " . ($method->isStatic() ? 'Yes' : 'No') . ")\n";
+
+    // Get parameters for methods
+    if ($method->getParameters()) {
+        echo "  Parameters: ";
+        foreach ($method->getParameters() as $parameter) {
+            echo $parameter->getName() . " ";
+        }
+        echo "\n";
+    }
+}
+
+echo "\n--- Creating Instance & Invoking Methods ---\n";
+// Create an instance without calling the constructor (if needed)
+// $instance = $reflectionClass->newInstanceWithoutConstructor();
+
+// Create an instance with constructor arguments
+$instance = $reflectionClass->newInstanceArgs(['value1', 'value2']);
+
+// Invoke a public method
+$publicMethodReflection = $reflectionClass->getMethod('publicMethod');
+echo "Invoking publicMethod: " . $publicMethodReflection->invoke($instance) . "\n";
+
+// Invoke a static method
+$staticMethodReflection = $reflectionClass->getMethod('staticMethod');
+echo "Invoking staticMethod: " . $staticMethodReflection->invoke(null) . "\n"; // Pass null for static methods
+
+// Set and Get property values (requires setting accessibility for non-public)
+$privatePropertyReflection = $reflectionClass->getProperty('privateProperty');
+$privatePropertyReflection->setAccessible(true); // Allow access to private property
+$privatePropertyReflection->setValue($instance, 'New private value.');
+echo "Private Property Value: " . $privatePropertyReflection->getValue($instance) . "\n";
+
+
+// Creation of New Class Instances Without Using Constructors
+$reflection = new ReflectionClass('MyClass');  
+$instance = $reflection->newInstanceWithoutConstructor();  
+$instance->__construct('Hello', 'World');
+```
+
+
+- For a complete list of methods for the `ReflectionClass` check [this](https://www.php.net/manual/en/book.reflection.php)
