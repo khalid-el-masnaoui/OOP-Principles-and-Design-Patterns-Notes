@@ -264,3 +264,17 @@ echo $clonedUser->address->street;   // Output => 456 Oak Ave
 - Used to access static properties and methods within the same class. 
 - Accessed using the scope resolution operator (`::`), for example, `self::$staticProperty` or `self::staticMethod()`.
 - Does not account for inheritance and will always refer to the class in which it is written, even if a child class overrides the static member.
+
+### `static`
+
+- Also refers to the **current class**, similar to `self`, but with a key difference in inheritance.
+- Used for **late static binding**, meaning it refers to the class that was called at **runtime**, not necessarily the class where the `static` keyword is written.
+- Allows for **polymorphic** behavior with static members, where a child class's overridden static property or method will be used when called through the child class.
+- Accessed using the scope resolution operator (`::`), for example, `static::$staticProperty` or `static::staticMethod()`.
+
+### Summary
+
+- Use `$this` for **instance-level** (non-static) members.
+- Use `self` for static members when you want to explicitly refer to the current class and ignore potential overrides in child classes.
+- Use `static` for static members when you want to leverage late static binding and allow for polymorphic behavior in child classes.
+
