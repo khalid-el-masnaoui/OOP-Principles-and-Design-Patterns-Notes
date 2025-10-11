@@ -4,6 +4,46 @@
 
 Object-Oriented Programming (OOP) in PHP is a programming paradigm that organizes code around objects rather than functions and logic. Exploring some PHP specific OOP implementations.
 
+## Table Of Contents
+
+- **[PHP Specific OOP implementations](#php-specific-oop-implementations)**
+   * **[Classes & Objects](#classes-objects)**
+   * **[Namespaces](#namespaces)**
+   * **[Traits](#traits)**
+   * **[Magic Methods](#magic-methods)**
+   * **[`$this`, `self`, and `static` keywords](**#this-self-and-static-keywords)**
+      + **[`$this`](#this)**
+      + **[`self`](#self)**
+      + **[`static`](#static)**
+      + **[Summary](#summary)**
+   * **[Overloading](#overloading)**
+   * **[Anonymous Classes](#anonymous-classes)**
+   * **[Object Comparison ](#object-comparison)**
+      + **[Comparison Operator (`==`)](#comparison-operator-)**
+      + **[Identity Operator (`===`)](#identity-operator-)**
+   * **[Covariance, Contravariance, Invariance](#covariance-contravariance-invariance)**
+      + **[Covariance](#covariance)**
+      + **[Contravariance](#contravariance)**
+      + **[Invariance](#invariance)**
+   * **[Readonly Properties](#readonly-properties)**
+   * **[Class & Object Functions](#class-object-functions)**
+      + **[`class_exists`](#class_exists)**
+      + **[`method_exist`](#method_exist)**
+      + **[`property_exists`](#property_exists)**
+      + **[Class Name](#class-name)**
+         - **[`get_class()`](#get_class)**
+         - **[`_CLASS_` magic constant](#class-magic-constant)**
+         - **[`::class`](#class)**
+         - **[ReflectionClass](#reflectionclass)**
+   * **[Auto-loading](#auto-loading)**
+      + **[`spl_autoload_register`](#spl_autoload_register)**
+      + **[Composer and PSR-4](#composer-and-psr-4)**
+   * **[Attributes](#attributes)**
+      + **[Define](#define)**
+      + **[Apply](#apply)**
+      + **[Retrieve](#retrieve)**
+   * **[Reflection Class](#reflection-class)**
+
 
 
 # PHP Specific OOP implementations
