@@ -660,3 +660,66 @@ The YAGNI principle, is software development principle that advocates against ad
 
 Instead of creating a highly generic `UserFactory` class with multiple methods for creating different user types (e.g., `createAdminUser`, `createGuestUser`) when only `createStandardUser` is currently needed, a **YAGNI** approach would involve starting with a simple `User` class and a basic constructor. The factory pattern can be introduced later if and when the need for different user creation logic becomes evident.
 
+# Tell, Don't Ask Principle 
+
+The "**Tell, Don't Ask**" principle in object-oriented programming advocates for telling objects what to do rather than asking them for their internal state and then making decisions based on that information. This promotes **encapsulation** and reduces coupling.
+
+#### Violation
+
+- `OrderProcessor` queries the `Order` object for its items and discount to perform the calculation. This exposes the internal structure of `Order` and creates a dependency.
+
+```php
+class Order
+{
+    private array $items = [];
+    private float $discount = 0.0;
+
+    public function addItem(string $itemName, float $price)
+    {
+        $this->items[] = ['name' => $itemName, 'price' => $price];
+    }
+
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    public function getDiscount(): float
+    {
+        return $this->discount;
+    }
+
+    public function applyDiscount(float $percentage)
+    {
+        $this->discount = $percentage;
+    }
+}
+
+class OrderProcessor
+{
+    public function calculateTotalPrice(Order $order): float
+    {
+        $total = 0.0;
+        foreach ($order->getItems() as $item) { // Asking for items
+            $total += $item['price'];
+        }
+
+        if ($order->getDiscount() > 0) { // Asking for discount
+            $total -= $total * $order->getDiscount();
+        }
+
+        return $total;
+    }
+}
+
+$order = new Order();
+$order->addItem("Laptop", 1200.00);
+$order->addItem("Mouse", 25.00);
+$order->applyDiscount(0.10); // 10% discount
+
+$processor = new OrderProcessor();
+$finalPrice = $processor->calculateTotalPrice($order);
+echo "Final price (violating TDA): " . $finalPrice . PHP_EOL;
+
+```
+
