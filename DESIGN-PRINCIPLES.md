@@ -723,3 +723,53 @@ echo "Final price (violating TDA): " . $finalPrice . PHP_EOL;
 
 ```
 
+#### Remedy
+
+
+- he `Order` object itself contains the logic to calculate its total price. 
+- The client code simply "tells" the `Order` to perform this action by calling `calculateTotalPrice()`, without needing to know the internal details of how the calculation is done. 
+- This improves encapsulation and makes the `Order` object more responsible for its own behavior.
+
+```php
+class Order
+{
+    private array $items = [];
+    private float $discount = 0.0;
+
+    public function addItem(string $itemName, float $price)
+    {
+        $this->items[] = ['name' => $itemName, 'price' => $price];
+    }
+
+    public function applyDiscount(float $percentage)
+    {
+        $this->discount = $percentage;
+    }
+
+    public function calculateTotalPrice(): float // Order calculates its own total
+    {
+        $total = 0.0;
+        foreach ($this->items as $item) {
+            $total += $item['price'];
+        }
+
+        if ($this->discount > 0) {
+            $total -= $total * $this->discount;
+        }
+
+        return $total;
+    }
+}
+
+// In the "Tell, Don't Ask" approach, the OrderProcessor might not even be needed for this specific task.
+// The client code directly tells the Order to calculate its total.
+
+$order = new Order();
+$order->addItem("Laptop", 1200.00);
+$order->addItem("Mouse", 25.00);
+$order->applyDiscount(0.10); // 10% discount
+
+$finalPrice = $order->calculateTotalPrice(); // Telling the order to calculate
+echo "Final price (following TDA): " . $finalPrice . PHP_EOL;
+
+```
