@@ -1058,3 +1058,54 @@ $logger->log("This is a test message.");
 - **Tight Coupling to the Locator:**  While it decouples services from clients, it couples clients to the Service Locator itself, which can make refactoring or reusing components in different contexts challenging.
     
 - **Reduced Testability:**  Hiding dependencies makes it harder to mock or substitute dependencies during testing, as the dependencies are not explicitly declared.
+
+### Comparison
+
+Due to these drawbacks of Service Locator, **Dependency Injection (DI**) is generally preferred over the Service Locator pattern. 
+- **DI** explicitly declares dependencies through constructor injection, setter injection, or method injection, making dependencies clear, testable, and easier to manage. 
+- While **Service Locators** can be found in some legacy codebases, **DI** is the recommended approach for managing dependencies in new projects.
+
+
+- In this example ,  it is not clear what the dependencies of our class `EmailProviderInterface`  are.
+- In order to figure out what the actual dependencies are, you'd have to read through all the methods and look at what's getting grabbed out!
+```php
+//example with service locator
+class SesEmailProvider implements EmailProviderInterface
+{
+    protected $client;
+
+    public function __construct(ServiceLocator $serviceLocator)
+    {
+         $this->client = $serviceLocator->get(SesClient::class);
+    }
+
+    public function send(string $email, Message $message): bool
+    {
+         // Code to send email
+    }
+}
+
+```
+
+
+- Using **DI**, there is no doubt about what this class needs to get an instance up and running.
+- **DI** makes dependencies explicit and easy to see, improving code readability and understanding. Service Locator can hide dependencies within method bodies, making them harder to discover.
+
+```php
+class SesEmailProvider implements EmailProviderInterface
+{
+    protected $client;
+
+    public function __construct(SesClient $client)
+    {
+         $this->client = $client;
+    }
+
+    public function send(string $email, Message $message): bool
+    {
+         // Code to send email
+    }
+}
+```
+
+**Dependency Injection**, often facilitated by a **DI Container**, is generally favored over the Service Locator pattern due to its benefits in terms of testability, maintainability, and clarity of dependencies.
