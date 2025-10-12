@@ -362,3 +362,66 @@ class ReadOnlyFile implements FileRead {}
 
 Following the Liskov Substitution Principle is a good indicator that you are following a correctly **hierarchy schema**. And if you don’t follow it, the unit tests for the superclass would never succeed for the subclasses.
 
+## Interface Segregation Principle
+
+> Make fine grained interfaces that are client specific.
+
+This principle proposes to divide interfaces so they are more specific. A class can implement multiple interfaces simultaneously, we shouldn’t force clients to deploy methods unnecessary.
+
+
+#### Violation
+1. The classes `Manager` and `Developer`  are forced to implement unused methods:
+
+```php
+interface Worker {
+    public function takeBreak();
+    public function code();
+    public function callToClient();
+    public function attendMeetings();
+    public function getPaid();
+}
+
+class Manager implements Worker
+{
+    public function code() { 
+	    return false; 
+	}
+}
+
+class Developer implements Worker
+{
+    public function callToClient() { 
+	    echo $swearWord; 
+	}
+}
+```
+
+2. `CreditNote` only uses `getCSV`method, but is forced to implement `getPDF` too.
+
+```php
+interface Exportable
+{
+    public function getPDF();
+    public function getCSV();
+}
+
+class Invoice implements Exportable
+{
+    public function getPDF() {
+        // ...
+    }
+    public function getCSV() {
+        // ...
+    }
+}
+
+class CreditNote implements Exportable
+{
+    public function getPDF() {
+        throw new \NotUsedFeatureException();
+    }
+    public function getCSV() {
+        // ...
+    }
+}
+```
