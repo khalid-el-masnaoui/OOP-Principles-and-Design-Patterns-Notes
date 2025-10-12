@@ -56,3 +56,50 @@ class UserManager {
     }
 }
 ```
+
+#### Remedy
+
+1. The issue could be solved by using two interfaces: `Report` and `ReportFormatter`.
+
+```php
+interface Report
+{
+    public function getTitle();
+    public function getDate();
+    public function getHeaders();
+    public function getBody();
+}
+
+interface ReportFormatter
+{
+    public function format(Report $report);
+}
+
+class HtmlReportFormatter implements ReportFormatter
+{
+    public function format(Report $report)
+    {
+        $output = '';
+        // ...
+
+        return $output;
+    }
+}
+```
+
+2. `EmailService` now manages email alerts, whereas `UserRepository` simply manages database interactions. Every class is responsible for one thing.
+
+```php
+class UserRepository {
+    public function saveUser($user) {
+        // Code to save user to database
+    }
+}
+
+class EmailService {
+    public function sendEmail($user) {
+        // Code to send an email
+    }
+}
+```
+
