@@ -324,3 +324,41 @@ class File
     }
 }
 ```
+#### Remedy
+
+1. By managing class **inheritance hierarchies** correctly, `Rectangle` and `Square` both follow **LSP**, allowing for correct substitutions. 
+
+```php
+interface Quadrilateral
+{
+    public function setHeight($h);
+    public function setWidth($w);
+    public function getArea();
+}
+
+class Rectangle implements Quadrilateral {}
+
+class Square implements Quadrilateral {}
+```
+
+2. By managing class **inheritance hierarchies** correctly, `File` and `ReadOnlyFile` both follow **LSP**, allowing for correct substitutions. 
+
+```php
+interface FileRead
+{
+    public function read();
+}
+
+interface FileWrite
+{
+    public function write();
+}
+
+class File implements FileRead, FileWrite {}
+
+class ReadOnlyFile implements FileRead {}
+```
+
+
+Following the Liskov Substitution Principle is a good indicator that you are following a correctly **hierarchy schema**. And if you don’t follow it, the unit tests for the superclass would never succeed for the subclasses.
+
