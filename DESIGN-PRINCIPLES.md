@@ -114,3 +114,48 @@ Why **OCP** is Important
 - Reduces changes to existing code, minimizing bugs.
 - Allows adding new functionalities without modifying existing classes.
 - Promotes use of polymorphism for scalability.
+
+#### Violation
+
+1. `Board` class that contains Rectangles and can calculate the area of the Rectangles.
+	- Adding a new shape (e.g `Circle`) requires modifying this class, which violates **OCP**.
+
+```php
+class Rectangle
+{
+    public $width;
+    public $height;
+}
+
+class Board
+{
+    public $rectangles = [];
+
+    // ...
+
+    public function calculateArea()
+    {
+        $area = 0;
+        foreach ($this->rectangles as $rectangle) {
+            $area += $rectangle->width * $rectangle->height;
+        }
+
+        return $area;
+    }
+}
+```
+
+2. `PaymentProcessor` class handles payment processing of different methods 
+	- Adding a new payment method requires modifying this class, which violates **OCP**.
+
+```php
+class PaymentProcessor {
+    public function payWithPayPal($amount) {
+        // Process PayPal payment
+    }
+
+    public function payWithStripe($amount) {
+        // Process Stripe payment
+    }
+}
+```
