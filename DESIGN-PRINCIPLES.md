@@ -26,3 +26,33 @@ Why **SRP** is Important
 - Simplifies debugging and testing.
 - Enhances reusability of code.
 - Reduces unintended side effects when modifying code.
+
+#### Violation
+
+1. This interface has two overlapped responsibilities coexisting here: get data and format it.
+
+```php
+interface Report
+{
+    public function getTitle();
+    public function getDate();
+    public function getHeaders();
+    public function getBody();
+    public function toCSV();
+    public function toHTML($name);
+}
+```
+
+2. Here, `UserManager` class is responsible for both user persistence and email notifications, which are unrelated concerns.
+
+```php
+class UserManager {
+    public function saveUser($user) {
+        // Code to save user to database
+    }
+
+    public function sendEmail($user) {
+        // Code to send an email
+    }
+}
+```
