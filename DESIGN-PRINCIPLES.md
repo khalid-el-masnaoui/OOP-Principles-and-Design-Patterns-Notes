@@ -535,3 +535,46 @@ class UserRepository {
     }
 }
 ```
+
+#### Remedy
+
+1. Now, `Manager` can work with any `Worker` that implements the Employee interface, adhering to **DIP**.
+```php
+interface Employee
+{
+    public function work();
+}
+
+class Worker implements Employee
+{
+    public function work() {}
+}
+
+class SpecializedWorker implements Employee
+{
+    public function work() {}
+}
+```
+
+2. Now, `UserRepository` can work with any `Database` that implements the Database interface, adhering to **DIP**.
+
+```php
+interface Database {
+    public function connect();
+}
+
+class MySQLDatabase implements Database {
+    public function connect() {
+        // MySQL connection
+    }
+}
+
+class UserRepository {
+    private $db;
+
+    public function __construct(Database $db) {
+        $this->db = $db;
+    }
+}
+```
+
