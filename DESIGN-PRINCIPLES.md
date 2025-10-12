@@ -247,3 +247,80 @@ Why **LSP** is Important
 - Ensures that functionality is extended by derived classes without disrupting existing behavior.  
 - Promotes abstraction through the use of interfaces.
 
+
+#### Violation
+
+1. Here, `Square` modifies `Rectangle`'s behavior unexpectedly, violating **LSP**.
+
+```php
+class Rectangle
+{
+    protected int $height;
+    protected int $width;
+
+    public function setWidth($w) { 
+	    $this->width = $w; 
+    }
+    
+    public function setHeight($h) { 
+	    $this->height = $h; 
+	}
+	
+    public function getArea() { 
+	    return $this->height * $this->width; 
+	}
+}
+
+class Square extends Rectangle
+{
+    public function setWidth($w) { 
+	    $this->width = $w; 
+	    $this->height = $w; 
+    }
+    
+    public function setHeight($h) { 
+	    $this->height = $h; 
+	    $this->width = $h; 
+	}
+}
+
+// calculate area
+function areaOfRectangle() {
+    $rectangle = new Rectangle();
+    $rectangle->setWidth(7);
+    $rectangle->setHeight(3);
+    $rectangle->getArea(); // 21
+}
+
+function areaOfRectangle() {
+    $rectangle = new Square();
+    $rectangle->setWidth(7);
+    $rectangle->setHeight(3);
+    $rectangle->getArea(); // 9
+}
+```
+
+2. Here, `ReadOnlyFile` modifies `File`'s behavior unexpectedly, violating **LSP**.
+
+```php
+class File
+{
+    public function read()
+    {
+       // ...
+    }
+ 
+    public function write()
+    {
+       // ...
+    }
+ }
+ 
+ class ReadOnlyFile extends File
+{
+    public function write()
+    {
+        throw new ItsReadOnlyFileException();
+    }
+}
+```
