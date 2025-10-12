@@ -4,6 +4,38 @@
 
 The three goals of Object Oriented Programming are **Robustness**, **Adaptability**, and **Reusability**. OOP design principles are guidelines intended for programmers to apply while working on software leading to achieving the previous mentioned goals of OOP.
 
+## Table Of Contents
+
+- **[SOLID Principles](#solid-principles)**
+   * **[Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)**
+         - **[Violation](#violation)**
+         - **[Remedy](#remedy)**
+   * **[Open Closed Principle (OCP)](#open-closed-principle-ocp)**
+         - **[Violation](#violation-1)**
+         - **[Remedy](#remedy-1)**
+   * **[Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)**
+         - **[Violation](#violation-2)**
+         - **[Remedy](#remedy-2)**
+   * **[Interface Segregation Principle](#interface-segregation-principle)**
+         - **[Violation](#violation-3)**
+         - **[Remedy](#remedy-3)**
+   * **[Dependency Inversion Principle](#dependency-inversion-principle)**
+         - **[Violation](#violation-4)**
+         - **[Remedy](#remedy-4)**
+- **[KISS - Keep It Simple, Stupid Principle](#kiss-keep-it-simple-stupid-principle)**
+- **[DRY Principle](#dry-principle)**
+- **[YAGNI - You Ain't Gonna Need It Principle](#yagni-you-aint-gonna-need-it-principle)**
+- **[Tell, Don't Ask Principle ](#tell-dont-ask-principle)**
+         - **[Violation](#violation-5)**
+         - **[Remedy](#remedy-5)**
+- **[Others ](#others)**
+   * **[Composition Over Inheritance Principle](#composition-over-inheritance-principle)**
+   * **[Dependency Injection (DI) & Service Locator](#dependency-injection-di-service-locator)**
+      + **[Dependency Injection (DI)](#dependency-injection-di)**
+      + **[Service Locator](#service-locator)**
+         - **[Benefits:](#benefits)**
+         - **[Drawbacks (anti-pattern)](#drawbacks-anti-pattern)**
+      + **[Comparison](#comparison)**
 
 
 # SOLID Principles
