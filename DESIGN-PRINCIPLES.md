@@ -578,3 +578,18 @@ class UserRepository {
 }
 ```
 
+# KISS - Keep It Simple, Stupid Principle
+
+This principle suggests not involving complexity in the code and trying to avoid it as much as you can. This is because the more complex code is written, the more difficult it becomes to modify at any later point in time. Other acronyms are: Keep it short and simple, Keep it simple and smart, and Keep it simple and straightforward.
+
+
+- **Write Readable Code:** Prioritize clarity over cleverness. Use clear variable names, concise logic, and avoid overly nested or complex expressions.
+
+
+- **Avoid Unnecessary Abstraction:**  Don't introduce complex architectural patterns or multiple layers of abstraction when a simpler solution suffices. A well-named function might be more effective than a convoluted class hierarchy for a simple task.
+    
+- **Follow Consistent Coding Standards:**  Adhere to established PHP coding standards like `PSR-12`. This ensures uniformity and predictability in your codebase, making it easier for anyone to understand.
+    
+- **Refactor Regularly:**  If a function or method grows too large or performs too many responsibilities, break it down into smaller, more focused units. Smaller units are easier to test, debug, and maintain.
+    
+- **Focus on the Core Problem:**  Resist the urge to add features or functionalities that are not immediately required (**YAGNI - You Aren't Gonna Need It**). Solve the current problem with the simplest possible solution.
