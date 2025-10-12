@@ -850,3 +850,148 @@ $electricCar->park();
 ```
 
 In this example, the `Car` class has an `EngineInterface`, allowing it to work with any class that implements that interface, demonstrating the flexibility of composition.
+
+## Dependency Injection (DI) & Service Locator
+
+
+### Dependency Injection (DI)
+
+The **Dependency Injection (DI) principle** is a design pattern that aims to decouple classes and enhance testability and maintainability. It achieves this by "**injecting**" the dependencies of an object from an external source, rather than having the object create them internally. This is a form of **Inversion of Control (IoC).**
+
+
+- **Inversion of Control (IoC):**  Instead of a class being responsible for creating or locating its own dependencies, the control of creating and managing these dependencies is "**inverted**" and handled by an external entity, often a **Dependency Injection Container.**
+    
+- **Loose Coupling:**  By injecting dependencies, classes become less reliant on specific implementations. They depend on abstractions (interfaces) rather than concrete classes, making it easier to swap out different implementations without modifying the client code.
+    
+- **Enhanced Testability:**  DI significantly improves unit testing. Since dependencies are injected, they can be easily replaced with "test doubles" (mocks, stubs, fakes) during testing, allowing for isolated testing of individual components without needing to set up complex real-world dependencies.
+    
+- **Improved Maintainability and Flexibility:**  Loosely coupled code is easier to understand, modify, and extend. Changes in one dependency's implementation are less likely to impact other parts of the application.
+
+
+**How It works**
+
+1. **Constructor Injection:** This is the most common and recommended method. Dependencies are passed as arguments to the class constructor.
+
+```php
+    class Database
+    {
+        public function query(string $sql): array { /* ... */ }
+    }
+
+    class UserRepository
+    {
+        private Database $db;
+
+        public function __construct(Database $db)
+        {
+            $this->db = $db;
+        }
+
+        public function getUserById(int $id): array
+        {
+            return $this->db->query("SELECT * FROM users WHERE id = {$id}");
+        }
+    }
+
+    // Usage:
+    $database = new Database();
+    $userRepository = new UserRepository($database);
+```
+
+
+2.  **Setter Injection:** Dependencies are injected through public setter methods after the object has been instantiated.
+
+```php
+    class Logger
+    {
+        public function log(string $message): void { /* ... */ }
+    }
+
+    class Service
+    {
+        private ?Logger $logger = null;
+
+        public function setLogger(Logger $logger): void
+        {
+            $this->logger = $logger;
+        }
+
+        public function doSomething(): void
+        {
+            if ($this->logger) {
+                $this->logger->log("Doing something...");
+            }
+            // ...
+        }
+    }
+
+    // Usage:
+    $service = new Service();
+    $logger = new Logger();
+    $service->setLogger($logger);
+    $service->doSomething();
+```
+
+3. **Interface-based Injection:** While not a direct injection mechanism, relying on interfaces for dependencies is a crucial aspect of DI, as it allows for **polymorphism** and easy swapping of concrete implementations.
+
+```php
+// 1. Define an interface for the dependency
+interface LoggerInterface
+{
+    public function log(string $message): void;
+}
+
+// 2. Create concrete implementations of the interface
+class FileLogger implements LoggerInterface
+{
+    private string $filePath;
+
+    public function __construct(string $filePath)
+    {
+        $this->filePath = $filePath;
+    }
+
+    public function log(string $message): void
+    {
+        file_put_contents($this->filePath, date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL, FILE_APPEND);
+    }
+}
+
+class DatabaseLogger implements LoggerInterface
+{
+    // In a real application, this would interact with a database
+    public function log(string $message): void
+    {
+        echo "Logging to database: " . $message . PHP_EOL;
+    }
+}
+
+// 3. Create a class that depends on the interface
+class UserService
+{
+    private LoggerInterface $logger;
+
+    // Constructor Injection: The dependency (LoggerInterface) is injected via the constructor
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    public function createUser(string $username): void
+    {
+        // ... logic to create user ...
+        $this->logger->log("User '{$username}' created.");
+    }
+}
+
+// 4. Usage: Injecting different implementations at runtime
+$fileLogger = new FileLogger('app.log');
+$userServiceWithFileLogger = new UserService($fileLogger);
+$userServiceWithFileLogger->createUser('JohnDoe');
+
+$databaseLogger = new DatabaseLogger();
+$userServiceWithDatabaseLogger = new UserService($databaseLogger);
+$userServiceWithDatabaseLogger->createUser('JaneSmith');
+```
+
+- This approach promotes loose coupling, testability, and flexibility, as you can easily swap out different logger implementations without modifying the `UserService` class.
