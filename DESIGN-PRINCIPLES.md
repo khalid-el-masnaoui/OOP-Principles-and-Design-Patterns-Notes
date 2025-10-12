@@ -103,3 +103,14 @@ class EmailService {
 }
 ```
 
+
+## Open Closed Principle (OCP)
+
+> You should be able to extend a classes behavior, without modifying it.
+
+**This principle is about class design and feature extensions**, it based on delegating responsibility to the class. If we have actions that depend on the subtype of a class, it is easier to provide that feature in the parent class, and then the subclasses can (re)implement that feature.
+
+Why **OCP** is Important
+- Reduces changes to existing code, minimizing bugs.
+- Allows adding new functionalities without modifying existing classes.
+- Promotes use of polymorphism for scalability.
