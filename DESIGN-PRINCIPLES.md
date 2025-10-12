@@ -8,26 +8,26 @@ The three goals of Object Oriented Programming are **Robustness**, **Adaptabilit
 
 - **[SOLID Principles](#solid-principles)**
    * **[Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)**
-         - **[Violation](#violation)**
-         - **[Remedy](#remedy)**
+	 - **[Violation](#violation)**
+	 - **[Remedy](#remedy)**
    * **[Open Closed Principle (OCP)](#open-closed-principle-ocp)**
-         - **[Violation](#violation-1)**
-         - **[Remedy](#remedy-1)**
+	 - **[Violation](#violation-1)**
+	 - **[Remedy](#remedy-1)**
    * **[Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)**
-         - **[Violation](#violation-2)**
-         - **[Remedy](#remedy-2)**
+	 - **[Violation](#violation-2)**
+	 - **[Remedy](#remedy-2)**
    * **[Interface Segregation Principle](#interface-segregation-principle)**
-         - **[Violation](#violation-3)**
-         - **[Remedy](#remedy-3)**
+	 - **[Violation](#violation-3)**
+	 - **[Remedy](#remedy-3)**
    * **[Dependency Inversion Principle](#dependency-inversion-principle)**
-         - **[Violation](#violation-4)**
-         - **[Remedy](#remedy-4)**
+	 - **[Violation](#violation-4)**
+	 - **[Remedy](#remedy-4)**
 - **[KISS - Keep It Simple, Stupid Principle](#kiss-keep-it-simple-stupid-principle)**
 - **[DRY Principle](#dry-principle)**
 - **[YAGNI - You Ain't Gonna Need It Principle](#yagni-you-aint-gonna-need-it-principle)**
 - **[Tell, Don't Ask Principle ](#tell-dont-ask-principle)**
-         - **[Violation](#violation-5)**
-         - **[Remedy](#remedy-5)**
+	 - **[Violation](#violation-5)**
+	 - **[Remedy](#remedy-5)**
 - **[Others ](#others)**
    * **[Composition Over Inheritance Principle](#composition-over-inheritance-principle)**
    * **[Dependency Injection (DI) & Service Locator](#dependency-injection-di-service-locator)**
