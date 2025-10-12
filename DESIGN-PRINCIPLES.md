@@ -482,3 +482,12 @@ class CreditNote implements CSVExportable
 ```
 
 
+## Dependency Inversion Principle
+
+> Depend on abstractions, not on concretions.
+
+As this principle could be difficult to understand, lets review what the principle states:
+
+> High level modules should not depend on low-level modules, both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+
+This principle inverts the way some people may think about OOP, dictating that both classes and subclasses must depend on the same abstraction.
