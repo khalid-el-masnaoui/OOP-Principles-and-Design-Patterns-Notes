@@ -150,6 +150,7 @@ PHP provides several **magic methods** which add dynamic behaviors to objects. �
 - `__isset($name)` : Invoked when the `isset()` or `empty()` functions are used on an inaccessible or non-existent property of an object.
 - `__unset($name)` : Invoked when the `unset()` function is used on an inaccessible or non-existent property of an object.
 - `__invoke(...$name)` : Allows an object to be called as if it were a function.
+- `__wakeup` : Automatically executed after using `unserialize()` function on the object ( e.g re-establish the database connection after un-serialization)
 - `__clone()` : Invoked whenever an object is cloned using the `clone` keyword. Its purpose :
 	- **Deep Copying:** (object properties)
 	- **Reassigning Properties**
