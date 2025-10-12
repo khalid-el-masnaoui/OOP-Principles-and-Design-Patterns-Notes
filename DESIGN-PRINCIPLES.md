@@ -773,3 +773,80 @@ $finalPrice = $order->calculateTotalPrice(); // Telling the order to calculate
 echo "Final price (following TDA): " . $finalPrice . PHP_EOL;
 
 ```
+# Others 
+
+## Composition Over Inheritance Principle
+
+The "**composition over inheritance**" principle suggests that classes should achieve code reuse and **polymorphic** behavior by containing instances of other classes (**composition**) rather than inheriting from a base or parent class (**inheritance**). 
+
+- **"Has-a" vs. "Is-a" Relationships:**
+    
+    - **Inheritance**: represents an `is-a` relationship (e.g., a `Dog` is a `Animal`). This creates a strong, hierarchical coupling between classes.
+    - **Composition**: represents a `has-a` relationship (e.g., a `Car` has an `Engine`). This allows objects to be built by combining independent components.
+    
+- **Advantages of Composition:**
+    - **Flexibility and Reduced Coupling:** Composition allows for easier modification and extension of behavior without affecting the structure of the composing class. Changing a component only impacts the specific component, not the entire hierarchy.
+    - **Avoidance of Inheritance Challenges:** Inheritance can lead to tight coupling, fragile base classes, and the "diamond problem" in languages that support multiple inheritance. Composition mitigates these issues.
+    - **Better Modularity and Reusability:** Individual components can be developed and tested independently and then combined in various ways to create diverse functionalities.
+    
+- **How it works:**
+    - Instead of extending a class, you create an instance of another class within your current class and delegate responsibilities to that instance.
+    - Interfaces can be used to define contracts for the composed objects, ensuring that they provide the expected methods, allowing for **polymorphism without inheritance.**
+
+**Example**
+
+- Instead of a `Car` class inheriting from an `Engine` class (which doesn't make logical sense in a `is-a` relationship), the `Car` class would compose an `Engine` object:
+
+
+```php
+interface EngineInterface {
+    public function start();
+    public function stop();
+}
+
+class V6Engine implements EngineInterface {
+    public function start() {
+        echo "V6 Engine starting...\n";
+    }
+    public function stop() {
+        echo "V6 Engine stopping...\n";
+    }
+}
+
+class ElectricEngine implements EngineInterface {
+    public function start() {
+        echo "Electric Engine engaging...\n";
+    }
+    public function stop() {
+        echo "Electric Engine disengaging...\n";
+    }
+}
+
+class Car {
+    private EngineInterface $engine;
+
+    public function __construct(EngineInterface $engine) {
+        $this->engine = $engine;
+    }
+
+    public function drive() {
+        $this->engine->start();
+        echo "Car is driving...\n";
+    }
+
+    public function park() {
+        echo "Car is parking...\n";
+        $this->engine->stop();
+    }
+}
+
+$v6Car = new Car(new V6Engine());
+$v6Car->drive();
+$v6Car->park();
+
+$electricCar = new Car(new ElectricEngine());
+$electricCar->drive();
+$electricCar->park();
+```
+
+In this example, the `Car` class has an `EngineInterface`, allowing it to work with any class that implements that interface, demonstrating the flexibility of composition.
