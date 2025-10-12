@@ -995,3 +995,66 @@ $userServiceWithDatabaseLogger->createUser('JaneSmith');
 ```
 
 - This approach promotes loose coupling, testability, and flexibility, as you can easily swap out different logger implementations without modifying the `UserService` class.
+
+
+### Service Locator
+
+The Service Locator pattern is a design pattern that provides a central registry or container for locating and accessing services or dependencies within an application.
+
+- **Centralized Registry:**  A dedicated class, often named `ServiceLocator` or similar, acts as a centralized registry.
+    
+- **Service Registration:**  Services (objects or instances of classes) are registered with the Service Locator, typically with a unique identifier (like a name or interface).
+    
+- **Service Retrieval:**  When a component needs a service, it requests it from the Service Locator using its identifier. The Service Locator then returns the requested service instance.
+
+```php
+class ServiceLocator
+{
+    private array $services = [];
+
+    public function addService(string $name, object $service): void
+    {
+        $this->services[$name] = $service;
+    }
+
+    public function getService(string $name): object
+    {
+        if (isset($this->services[$name])) {
+            return $this->services[$name];
+        }
+        throw new Exception("Service '$name' not found.");
+    }
+}
+
+// Example usage
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    public function log(string $message): void {
+        echo "Logging to file: $message\n";
+    }
+}
+
+$locator = new ServiceLocator();
+$locator->addService('logger', new FileLogger());
+
+// Somewhere else in the application
+$logger = $locator->getService('logger');
+$logger->log("This is a test message.");
+```
+
+#### Benefits:
+
+- **Decoupling:** It can help decouple components from their concrete implementations, as components interact with the Service Locator rather than directly instantiating dependencies.
+- **Centralized Management:** Provides a central place to manage and configure services.
+- **Runtime Swapping:** Allows for easy swapping of service implementations at runtime by simply updating the registration in the Service Locator.
+
+#### Drawbacks (anti-pattern)
+
+- **Hidden Dependencies:**  It hides a class's dependencies, making it difficult to understand what a class needs without examining its implementation. This hinders testability and maintainability.
+    
+- **Tight Coupling to the Locator:**  While it decouples services from clients, it couples clients to the Service Locator itself, which can make refactoring or reusing components in different contexts challenging.
+    
+- **Reduced Testability:**  Hiding dependencies makes it harder to mock or substitute dependencies during testing, as the dependencies are not explicitly declared.
