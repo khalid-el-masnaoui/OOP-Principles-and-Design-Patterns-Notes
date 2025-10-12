@@ -491,3 +491,47 @@ As this principle could be difficult to understand, lets review what the princip
 > High level modules should not depend on low-level modules, both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
 
 This principle inverts the way some people may think about OOP, dictating that both classes and subclasses must depend on the same abstraction.
+
+#### Violation
+
+1. `Manager`is tied to `Worker` implementation , what if we need to add a new type of workers?
+
+```php
+class Worker
+{
+    public function work() {}
+}
+
+class Manager
+{
+    private $worker;
+
+    public function setWorker(Worker $w)
+    {
+        $this->worker = $w;
+    }
+
+    public function manage()
+    {
+        $this->worker->work();
+    }
+}
+```
+
+2. `UserRepository`is tied to `MySQLDatabase`, what if we need to add a database implementation?
+
+```php
+class MySQLDatabase {
+    public function connect() {
+        // MySQL connection
+    }
+}
+
+class UserRepository {
+    private $db;
+
+    public function __construct(MySQLDatabase $db) {
+        $this->db = $db;
+    }
+}
+```
