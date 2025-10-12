@@ -643,3 +643,20 @@ The **DRY (Don't Repeat Yourself)** principle is a fundamental software developm
 
 
 **Note** : While highly beneficial, excessive or misapplied **DRY** can lead to over-abstraction, making the code more complex and harder to understand or modify in some cases.
+# YAGNI - You Ain't Gonna Need It Principle
+
+The YAGNI principle, is software development principle that advocates against adding functionality until it is demonstrably necessary.
+
+
+- **Focus on Current Requirements:**  Implement only what is explicitly required by the current project scope or user stories. Avoid adding features or code that are based on speculative future needs, as these needs may never materialize or may change significantly.
+    
+- **Avoid Over-Engineering:**  Resist the temptation to build overly complex or abstract solutions for problems that are currently simple. While design patterns and architectural principles are valuable, applying them prematurely can lead to unnecessary complexity and maintenance overhead.
+    
+- **Prioritize Simplicity and Iteration:**  Strive for the simplest possible solution that meets the current requirements. If new requirements arise, the code can be extended or modified iteratively. This approach aligns with agile and lean methodologies, promoting flexibility and responsiveness to change.
+    
+- **Reduce Technical Debt:**  Implementing unnecessary features or complex abstractions can introduce technical debt that will need to be managed later. By adhering to **YAGNI**, developers can minimize this debt and focus on delivering value more efficiently.
+
+**Example** 
+
+Instead of creating a highly generic `UserFactory` class with multiple methods for creating different user types (e.g., `createAdminUser`, `createGuestUser`) when only `createStandardUser` is currently needed, a **YAGNI** approach would involve starting with a simple `User` class and a basic constructor. The factory pattern can be introduced later if and when the need for different user creation logic becomes evident.
+
