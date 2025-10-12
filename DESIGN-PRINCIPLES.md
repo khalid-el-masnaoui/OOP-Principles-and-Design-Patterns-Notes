@@ -593,3 +593,53 @@ This principle suggests not involving complexity in the code and trying to avoid
 - **Refactor Regularly:**  If a function or method grows too large or performs too many responsibilities, break it down into smaller, more focused units. Smaller units are easier to test, debug, and maintain.
     
 - **Focus on the Core Problem:**  Resist the urge to add features or functionalities that are not immediately required (**YAGNI - You Aren't Gonna Need It**). Solve the current problem with the simplest possible solution.
+
+
+# DRY Principle
+
+The **DRY (Don't Repeat Yourself)** principle is a fundamental software development principle that advocates for avoiding redundant code and logic. The core idea is that "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system."
+
+
+- **Functions:** Encapsulate repetitive operations within functions that can be called whenever needed.
+
+```php
+    function calculateTotalPrice($items) {
+        $total = 0;
+        foreach ($items as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+        return $total;
+    }
+```
+
+
+- **Classes and Objects:** Use object-oriented programming to define classes that encapsulate data and behavior, promoting code reuse and organization.
+
+```php
+    class User {
+        private $name;
+        private $email;
+
+        public function __construct($name, $email) {
+            $this->name = $name;
+            $this->email = $email;
+        }
+
+        public function getFullName() {
+            return $this->name;
+        }
+
+        public function getEmailAddress() {
+            return $this->email;
+        }
+    }
+```
+
+- **Traits:**  PHP traits allow you to reuse methods across different classes without using inheritance, providing a flexible way to share common functionality.
+    
+- **Configuration Files:**  Centralize application settings and configurations in a single file or a set of files to avoid repeating configuration values throughout the code.
+    
+- **Database Schema Design:** Design your database schema to minimize data redundancy and ensure data integrity.
+
+
+**Note** : While highly beneficial, excessive or misapplied **DRY** can lead to over-abstraction, making the code more complex and harder to understand or modify in some cases.
