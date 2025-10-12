@@ -425,3 +425,60 @@ class CreditNote implements Exportable
     }
 }
 ```
+#### Remedy
+
+1. We create more grained interfaces.
+
+```php
+interface Worker
+{
+    public function takeBreak();
+    public function getPaid();
+}
+
+interface Coder {
+    public function code();
+}
+
+interface ClientFacer {
+    public function callToClient();
+    public function attendMeetings();
+}
+
+class Developer implements Worker, Coder {}
+
+class Manager implements Worker, ClientFacer {}
+```
+
+2. We create more grained interfaces.
+
+```php
+interface PDFExportable
+{
+    public function getPDF();
+}
+
+interface CSVExportable
+{
+    public function getCSV();
+}
+
+class Invoice implements PDFExportable, CSVExportable
+{
+    public function getPDF() {
+        // ...
+    }
+    public function getCSV() {
+        // ...
+    }
+}
+
+class CreditNote implements CSVExportable
+{
+    public function getCSV() {
+        // ...
+    }
+}
+```
+
+
