@@ -23,9 +23,9 @@ Design patterns are typically categorized into three main types based on their i
 
 ### Creational Patterns
 
-| #     | 📖 Pattern       | Type                                                               | Code Example | Diagram  |
-| ----- | ---------------- | ------------------------------------------------------------------ | ------------ | -------- |
-| **1** | Abstract Factory | ![Creational](https://img.shields.io/badge/Creational-light_green) | [HERE]()     | [HERE]() |
+| #     | 📖 Pattern       | Type                                                               | Code Examples & Diagram                                                                                                                               |
+| ----- | ---------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1** | Abstract Factory | ![Creational](https://img.shields.io/badge/Creational-light_green) | [HERE](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/README.md) |
 
 
 

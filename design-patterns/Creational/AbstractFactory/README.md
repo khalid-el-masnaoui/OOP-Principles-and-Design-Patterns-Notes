@@ -1,5 +1,4 @@
 
-
 # AbstractFactory
 
 ## Definition 
