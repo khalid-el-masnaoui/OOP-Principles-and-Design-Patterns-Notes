@@ -43,10 +43,10 @@ class Car
     public $color;
     public $doors;
 
-    public function __construct(CarBuilder $cb)
+    public function __construct(CarBuilder $carBuilder)
     {
-        $this->color = $cb->getColor();
-        $this->doors = $cb->getDoors();
+        $this->color = $carBuilder->getColor();
+        $this->doors = $carBuilder->getDoors();
     }
 
     static function builder()
