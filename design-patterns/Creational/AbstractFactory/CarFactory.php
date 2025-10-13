@@ -77,7 +77,7 @@ class CarOptions
 }
 
 # Client code example
-// the factory is selected based on the environment or configuration parameters
+// the factory is selected based on the environment/configuration parameters
 $carColor = 'blue';
 switch ($carColor) {
     case 'blue':
