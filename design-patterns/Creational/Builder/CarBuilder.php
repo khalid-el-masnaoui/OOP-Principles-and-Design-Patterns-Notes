@@ -38,6 +38,23 @@ class CarBuilder
     }
 }
 
+/**
+ * Director Class
+ */
+class Director
+{
+    public function buildSprotsCar(carBuilder $carBuilder): Car
+    {
+        return $carBuilder->setColor("Red")->setDoors(2)->build();
+    }
+    
+    public function buildSUVCar(carBuilder $carBuilder): Car
+    {
+        return $carBuilder->setColor("Silver")->setDoors(5)->build();
+    }
+}
+
+
 class Car
 {
     public $color;
@@ -60,3 +77,8 @@ $car = Car::builder()->setColor("Silver")->setDoors(5)->build();
 
 print_r($car);
 // Output: Car Object([color] => Silver, [doors] => 5)
+
+$director = new Director();
+$sportCar = $director->buildSprotsCar(new CarBuilder());
+
+
