@@ -1,6 +1,6 @@
 <?php
 
-namespace DesignPatterns\Creational\AbstractFactory;
+namespace DesignPatterns\Creational;
 
 /**
  * Abstract Factory defines an interface for creating all distinct products,
