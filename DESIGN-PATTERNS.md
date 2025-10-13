@@ -26,3 +26,12 @@ Design patterns are typically categorized into three main types based on their i
 | #     | 📖 Pattern       | Type                                                               | Code Example | Diagram  |
 | ----- | ---------------- | ------------------------------------------------------------------ | ------------ | -------- |
 | **1** | Abstract Factory | ![Creational](https://img.shields.io/badge/Creational-light_green) | [HERE]()     | [HERE]() |
+
+
+
+
+
+
+
+# Resources 
+[Refactoring-Guru](#https://refactoring.guru/design-patterns/catalog)
