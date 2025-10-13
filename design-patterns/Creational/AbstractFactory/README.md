@@ -1,5 +1,12 @@
 
-# AbstractFactory
+# Abstract Factory
+
+## Examples
+
+**[Template Factory]()**
+**[Writer Factory]()**
+**[Car Factory]()**
+**[Barrack Factory]()**
 
 ## Definition 
 
