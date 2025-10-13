@@ -22,7 +22,7 @@ class OnlyWeaponBarrackFactory implements BarrackFactory
 {
     public function weapon()
     {
-        return new Arms();
+        return new Weapon();
     }
 
     public function armor()
@@ -152,7 +152,7 @@ class Armor implements Equipment
 # Client code example
 // the factory is selected based on the environment or configuration parameters
 $equipementType = 'armor';
-switch ($templateEngine) {
+switch ($equipementType) {
     case 'weapon':
         $barrackFactory = new OnlyWeaponBarrackFactory();
         break;
