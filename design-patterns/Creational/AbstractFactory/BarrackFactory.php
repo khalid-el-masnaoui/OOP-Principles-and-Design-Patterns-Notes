@@ -150,7 +150,7 @@ class Armor implements Equipment
 
 
 # Client code example
-// the factory is selected based on the environment or configuration parameters
+// the factory is selected based on the environment/configuration parameters
 $equipementType = 'armor';
 switch ($equipementType) {
     case 'weapon':
