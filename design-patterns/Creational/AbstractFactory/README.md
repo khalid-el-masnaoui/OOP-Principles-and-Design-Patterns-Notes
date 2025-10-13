@@ -3,10 +3,10 @@
 
 ## Examples
 
-**[Template Factory](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/TemplateFactory.php)**
-**[Writer Factory](#https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/WriterFactory.php)**
-**[Car Factory](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/CarFactory.php)**
-**[Barrack Factory](#https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/BarrackFactory.php)**
+- **[Template Factory](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/TemplateFactory.php)**
+- **[Writer Factory](#https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/WriterFactory.php)**
+- **[Car Factory](#https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/CarFactory.php)**
+- **[Barrack Factory](#https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/BarrackFactory.php)**
 
 ## Definition 
 
