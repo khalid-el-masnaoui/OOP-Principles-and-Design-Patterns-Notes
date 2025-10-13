@@ -31,7 +31,7 @@ classDiagram
 
 ## When to Use
 
-Use the Abstract Factory design pattern ==when you need to create families of related objects, ensure they are compatible, and want to decouple your client code from the specific concrete classes being used==. It is especially useful when your system needs to be flexible and support different product variations, such as for different operating systems or databases, without changing the core client code. 
+Use the Abstract Factory design pattern when you need to create families of related objects, ensure they are compatible, and want to decouple your client code from the specific concrete classes being used. It is especially useful when your system needs to be flexible and support different product variations, such as for different operating systems or databases, without changing the core client code. 
 
 When to use Abstract Factory
 
