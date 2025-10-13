@@ -35,4 +35,4 @@ Design patterns are typically categorized into three main types based on their i
 
 
 # Resources 
-[Refactoring-Guru](#https://refactoring.guru/design-patterns/catalog)
+[Refactoring-Guru](https://refactoring.guru/design-patterns/catalog)
