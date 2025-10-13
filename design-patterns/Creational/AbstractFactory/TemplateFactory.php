@@ -91,7 +91,7 @@ class BladeBody implements Body
 }
 
 # Client code example
-// the factory is selected based on the environment or configuration parameters
+// the factory is selected based on the environment/configuration parameters
 $templateEngine = 'blade';
 switch ($templateEngine) {
     case 'smarty':
