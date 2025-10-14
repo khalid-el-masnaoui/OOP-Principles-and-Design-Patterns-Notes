@@ -52,7 +52,7 @@ class Publisher
     }
 }
 
-# Client code
+# Client code example
 $originalPublisher = new Publisher("Awesome Books Inc.");
 $originalBook = new Book("The Great Adventure", "John Doe", $originalPublisher);
 
