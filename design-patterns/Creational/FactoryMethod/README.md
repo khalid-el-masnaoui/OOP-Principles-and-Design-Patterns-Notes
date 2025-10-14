@@ -17,3 +17,19 @@ Instead of directly instantiating objects using constructors, client code intera
 - At first glance, this change may look pointless: we just moved the constructor call from one part of the program to another. However, consider this: now you can override the factory method in a subclass and change the class of products being created by the method.
 
 - There’s a slight limitation though: subclasses may return different types of products only if these products have a common base class or interface. Also, the factory method in the base class should have its return type declared as this interface.
+
+## Diagram 
+
+
+```mermaid
+classDiagram
+    Client -- Creator : Uses
+    Creator <|.. ConcreteCreator : Implements
+    Creator : +factoryMethod()
+    Product <-- Creator : Creates
+    ConcreteCreator : +factoryMethod()
+    Product <|.. ConcreteProduct : Implements
+    ConcreteProduct <-- ConcreteCreator : Creates
+
+```
+
