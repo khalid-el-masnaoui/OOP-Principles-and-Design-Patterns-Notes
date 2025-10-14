@@ -27,6 +27,7 @@ Design patterns are typically categorized into three main types based on their i
 | ----- | ---------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1** | Abstract Factory | ![Creational](https://img.shields.io/badge/Creational-light_green) | [HERE](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/AbstractFactory/README.md) |
 | **2** | Builder          | ![Creational](https://img.shields.io/badge/Creational-light_green) | [HERE](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/Builder/README.md)         |
+| **3** | Factory Method   | ![Creational](https://img.shields.io/badge/Creational-light_green) | [HERE](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/FactoryMethod/README.md)   |
 
 
 
