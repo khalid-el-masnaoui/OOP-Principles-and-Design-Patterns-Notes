@@ -33,3 +33,23 @@ classDiagram
 
 ```
 
+
+## When to Use
+
+Many designs start by using **Factory Method** (less complicated and more customizable via subclasses) and evolve toward **Abstract Factory**.
+
+**Abstract Factory classes** are often based on a set of **Factory Methods**.
+
+Scenarios where you can use **factory method**:
+
+- **When a class cannot anticipate the type of objects it needs to create beforehand:**  If your code needs to work with various types of objects that share a common interface or abstract class, but the specific concrete type is not known until runtime, the Factory Method allows you to defer the instantiation to subclasses. 
+    
+- **When you want to provide a way for users of your library or framework to extend its internal components:**  By using a Factory Method, you can define a flexible mechanism for creating objects, allowing clients to subclass your factory and introduce their own custom object types without modifying the core library code. 
+    
+- **When you want to hide the creation logic from the client:**  The Factory Method encapsulates the object creation process within the factory, preventing the client from needing to know the details of how an object is instantiated. This promotes loose coupling and makes the system more maintainable. 
+    
+- **When object creation involves complex logic or dependencies:**  If the process of creating an object is intricate, requiring multiple steps, resource management, or interaction with other components, a Factory Method can centralize this logic, making it easier to manage and modify.
+    
+- **When you need to decide the object type at runtime based on certain conditions:**  For instance, if you have a configuration or user input that dictates which specific concrete class should be instantiated, the Factory Method can contain the conditional logic to return the appropriate object.
+    
+- **When you want to save system resources by reusing existing objects (caching):**  While not its primary purpose, a Factory Method can be implemented to include caching mechanisms, returning existing instances of objects instead of always creating new ones, which can be beneficial for resource-intensive objects.
