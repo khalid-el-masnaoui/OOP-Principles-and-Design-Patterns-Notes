@@ -4,6 +4,7 @@
 ## Examples
 
 - **[Page Prototype](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/Prototype/PagePrototype.php)**
+- **[Page Prototype - 2](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/Prototype/PagePrototype2.php)**
 - **[Book Prototype](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/Prototype/BookPrototype.php)**
 - **[Plane Prototype](https://github.com/khalid-el-masnaoui/OOP-Principles-and-Design-Patterns-Notes/blob/main/design-patterns/Creational/Prototype/PlanePrototype.php)**
 
