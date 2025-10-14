@@ -37,3 +37,4 @@ Design patterns are typically categorized into three main types based on their i
 
 # Resources 
 [Refactoring-Guru](https://refactoring.guru/design-patterns/catalog)
+[DesignPatternsPHP](https://designpatternsphp.readthedocs.io/en/latest/index.html)
